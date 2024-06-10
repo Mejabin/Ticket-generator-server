@@ -30,13 +30,13 @@ async function run() {
     
     const ticketCollection = client.db("tickets").collection("ticket");
   
-    app.post("/tickets", async (req, res) => {
+    app.post("/add-tickets", async (req, res) => {
         const service = req.body;
         console.log(service)
         const result = await ticketCollection.insertOne(service);
         res.send(result);
         });
-    app.get("/tickets", async (req, res) => {
+    app.get("/all-tickets", async (req, res) => {
         const result = await ticketCollection.find({}).toArray();
         res.send(result);
         });
@@ -48,7 +48,9 @@ async function run() {
 run().catch(console.dir);
 
 
-
+app.get("/", (req, res)=>{
+  res.send("working")
+})
 
 
 app.listen(port, () => {
