@@ -48,17 +48,6 @@ async function run() {
 run().catch(console.dir);
 
 
-app.post("/user-post", async (req, res) => {
-  const userData = req.body;
-  try {
-    const result = await userCollection.insertOne(userData);
-    res.status(200).send({ success: "User Posted Successfully" });
-  } catch (error) {
-    console.error("Error inserting user:", error);
-    res.status(500).send({ error: "Failed to post user" });
-  }
-});
-
 
 
 
