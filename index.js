@@ -4,9 +4,14 @@ const port = process.env.PORT || 5000;
 require("dotenv").config();
 const cors = require("cors");
 const app = express();
-app.use(cors());
+var corsOptions = {
+  origin: 'http://localhost:5173/',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 
 app.use(express.json());
+app.use(cors(corsOptions));
 
 const uri =
   "mongodb+srv://mehjabinelu11:IjXMc8Tu2cxWWFbm@cluster0.yer4oak.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
