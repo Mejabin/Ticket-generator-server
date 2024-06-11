@@ -7,9 +7,8 @@ const app = express();
 const corsConfig = {
   origin: true,
   credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 };
-
 
 app.use(express.json());
 app.use("*", cors(corsConfig));
@@ -29,13 +28,12 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     await client.connect();
-    // Send a ping to confirm a successful connection
+
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
   } finally {
-    // Ensures that the client will close when you finish/error
   }
 }
 run().catch(console.dir);
@@ -60,10 +58,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`App is running on port ${port}`);
 });
-
-// Gracefully shut down the server and close the MongoDB connection
-// process.on("SIGINT", async () => {
-//   console.log("Shutting down...");
-//   await client.close();
-//   process.exit();
-// });
