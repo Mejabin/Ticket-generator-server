@@ -41,14 +41,22 @@ run().catch(console.dir);
 const ticketCollection = client.db("tickets").collection("ticket");
 
 app.post("/add-tickets", async (req, res) => {
-  const service = req.body;
-  console.log(service);
-  const result = await ticketCollection.insertOne(service);
-  res.send(result);
+  try {
+    const service = req.body;
+    console.log(service);
+    const result = await ticketCollection.insertOne(service);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+  }
 });
 app.get("/all-tickets", async (req, res) => {
-  const result = await ticketCollection.find({}).toArray();
-  res.send(result);
+  try {
+    const result = await ticketCollection.find({}).toArray();
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get("/", (req, res) => {
